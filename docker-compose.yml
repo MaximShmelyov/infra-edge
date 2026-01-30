@@ -1,0 +1,18 @@
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: edge-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    networks:
+      - edge
+
+networks:
+  edge:
+    name: edge
+    driver: bridge
