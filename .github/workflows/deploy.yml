@@ -25,9 +25,9 @@ jobs:
             cd /home/${{ secrets.VPS_USER }}/apps/infra-edge
             git pull origin main
 
-            # поднять/обновить edge-nginx (и сеть edge будет создана здесь)
+            # start/update edge-nginx (and the edge network will be created here)
             docker compose up -d
 
-            # проверка конфига и reload без пересоздания контейнера
+            # config test and reload without recreating the container
             docker compose exec -T nginx nginx -t
             docker compose exec -T nginx nginx -s reload
