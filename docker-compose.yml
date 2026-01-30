@@ -7,7 +7,13 @@ services:
       - "80:80"
       - "443:443"
     volumes:
+      # main nginx config
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+
+      # vhost configs (include /etc/nginx/conf.d/*.conf)
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+
+      # TLS certificates
       - /etc/letsencrypt:/etc/letsencrypt:ro
     networks:
       - edge
